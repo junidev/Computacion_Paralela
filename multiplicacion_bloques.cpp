@@ -5,22 +5,19 @@
 using namespace std;
 #define MAX 50
 
-void multiplicacion_matriz(){
+
+void multiplicacion_matriz_bloques(){
     unsigned start,end;
     int M[MAX][MAX];
     int X[MAX][MAX];
     int Y[MAX][MAX];
 
-    //creo los arrays
     for (int i = 0; i < MAX; i++){
           for (int j = 0; j < MAX; j++){
                 X[i][j] = 1+rand()%(100-1);
                 Y[i][j] = 1+rand()%(100-1);
-                //cout << h <<" - "<Y[h][w]<< endl; 
           }
     }
-
-
 
     //Compruebo loos arrays
     /* for(int x=0;x<MAX;x++) {
@@ -28,35 +25,28 @@ void multiplicacion_matriz(){
             cout<<X[x][y] <<" - ";  
         }
          cout<<endl;  
-    }
-
+    }*/
     
-    int count; 
-    for(int x=0;x<MAX;x++) {
-        for(int y=0;y<MAX;y++){
-            cout<< x << " , "<<y<< " : "<<Y[x][y] <<"   ***";   
-            count++;
-        }
-         cout<<endl;  
-    }
-
-    cout <<"cantidad: " <<count; */
-
-
+    //bloques 
+    int B=MAX/5;
     start = clock();
-    for(int i = 0; i < MAX; ++i){
-        for(int j = 0; j < MAX; ++j){
-            for(int k = 0; k < MAX; ++k)
-            {
-                M[i][j] += X[i][k] * Y[k][j];
+    for (int x = 0; x < MAX; x+=B) {
+      for (int y = 0; y < MAX; y+=B) {
+        for (int z = 0; z < MAX; z+=B) {
+          for (int i = x; i < x+B; i++) {
+            for (int j = y; j < y+B; j++) {
+              for (int k = z; k < z+B; k++) {
+                M[i][j] += X[i][k]*Y[k][j];
+              }
             }
+          }
         }
+      }
     }
     end = clock();
-    cout << "Tiempo: "<< (double(end-start)/CLOCKS_PER_SEC)<<endl;
+    cout << "Tiempo : "<< (double(end-start)/CLOCKS_PER_SEC)<<endl;
 }
 
 int main(){
-    multiplicacion_matriz();
-
+    multiplicacion_matriz_bloques();
 }

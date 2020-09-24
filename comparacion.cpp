@@ -7,13 +7,13 @@ using namespace std;
 
 double A[1000][1000], x[1000], y[1000];
 
-void firstLoop(){
+void primero(){
     for(int i = 0; i < MAX ; i++)
         for(int j = 0; j < MAX ; j++)
             y[i] += A[i][j] * x[j];
 }
 
-void secondLoop(){
+void segundo(){
     for(int j = 0; j < MAX ; j++)
         for(int i = 0; i < MAX ; i++)
             y[i] += A[i][j] * x[j];
@@ -26,13 +26,13 @@ int main(){
     double duration , duration2;
     start = clock();
 
-    firstLoop();
+    primero();
 
     duration = ( clock() - start ) / (double) CLOCKS_PER_SEC;
-    cout<<"printf: "<< duration <<'\n';
+    cout<<"Primer : "<< duration <<'\n';
 
     start2 = clock();
-    secondLoop();
+    segundo();
     duration2 = ( clock() - start2 ) / (double) CLOCKS_PER_SEC;
-    cout<<"printf: "<< duration2 <<'\n';
+    cout<<"Segundo:  "<< duration2 <<'\n';
 }
