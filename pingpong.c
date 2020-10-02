@@ -23,17 +23,17 @@ int main(int argc, char** argv) {
 
   int contador = 0;
 
-  char *mensaje = "-Mensaje- ";
-  int mensajeint =999;
+  //char *mensaje = "-Mensaje- ";
+  //int mensajeint =999;
   int partner_rank = (rank + 1) % 2;
   while (contador < iteraraciones) {
     if (rank == contador % 2) {
         contador++;
         MPI_Send(&contador, 1, MPI_INT, partner_rank, 0, MPI_COMM_WORLD);
-        printf("Proceso %d envio .  e incremento contador . %d to %d\n", rank, contador, partner_rank);
+        printf("Proceso %d envio  e incremento la iteración . %d to %d\n", rank, contador, partner_rank);
     } else {
         MPI_Recv(&contador, 1, MPI_INT, partner_rank, 0, MPI_COMM_WORLD, MPI_STATUS_IGNORE);
-        printf("Proceso %d recibio .  contador %d from %d\n",  rank,  contador, partner_rank);
+        printf("Proceso %d recibio . iteración %d de  %d\n",  rank,  contador, partner_rank);
     }
 
   }
